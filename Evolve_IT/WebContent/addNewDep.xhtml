@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/template/main.xhtml">
+	<ui:define name="content">
+		<h:form id="frmAddDep" prependId="false">
+			<p:growl id="msgGrol" globalOnly="true" showSummary="true"
+				showDetail="true" />
+			<p:panelGrid id="pnlDep" columns="3">
+
+				<f:facet name="header">
+					<p:outputLabel value="Department DataBase" />
+				</f:facet>
+
+				<p:outputLabel value="Department Name" for="txtDepartmentName" />
+				<p:inputText id="txtDepartmentName" value="#{depMB.depar.depName}"
+					required="true" requiredMessage="Enter the department name" />
+				<p:message for="txtDepartmentName" />
+
+				<p:outputLabel value="Department Description"
+					for="txtDepartmentDesc" />
+				<p:inputTextarea id="txtDepartmentDesc"
+					value="#{depMB.depar.depDesc}" required="true"
+					requiredMessage="Write Description about the department" />
+				<p:message for="txtDepartmentDesc" />
+
+				<f:facet name="footer">
+
+					<p:commandButton value="Add" process="pnlDep" update="frmAddDep"
+						action="#{depMB.addDepartment}"
+						rendered="#{depMB.depar.depId == null ? 'true' : 'false'}" />
+
+					<p:commandButton value="Update" process="pnlDep" update="frmAddDep"
+						action="#{depMB.updateDep}"
+						rendered="#{depMB.depar.depId == null ? 'false' : 'true'}" />
+
+					<p:commandButton value="Delete" process="pnlDep" update="frmAddDep"
+						action="#{depMB.deleteDep}"
+						rendered="#{depMB.depar.depId  == null ? 'false' : 'true'}" />
+
+					<p:commandButton value="Cancel" process="pnlDep" update="frmAddDep"
+						action="#{depMB.cancel}" />
+
+				</f:facet>
+			</p:panelGrid>
+
+			<p:dataTable id="tblDep" value="#{depMB.allDepart}" var="dep"
+				selection="#{depMB.depar}" selectionMode="Single"
+				rowKey="#{dep.depId}">
+				<p:ajax event="rowSelect" update=":pnlDep" />
+
+				<f:facet name="header">
+					<p:outputLabel value="Departments Table" />
+				</f:facet>
+
+				<p:column headerText="ID" sortBy="#{dep.depId}"
+					filterBy="#{dep.depId}">
+					<h:outputText value="#{dep.depId}" />
+				</p:column>
+
+				<p:column headerText="Department Name">
+					<p:outputLabel value="#{dep.depName}" />
+				</p:column>
+
+				<p:column headerText="Depatrment Decription">
+					<p:outputLabel value="#{dep.depDesc}" />
+				</p:column>
+
+
+			</p:dataTable>
+
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+</html>

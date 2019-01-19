@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<p:spacer width="10px" />
+	<p:outputPanel>
+
+		<p:commandButton value="Location" type="button"
+			onclick="PF('dlg1').show();" />
+		<p:dialog header="Evolve IT Company" widgetVar="dlg1" modal="true"
+			height="100">
+			<h:outputText value="Seventh Circle" />
+		</p:dialog>
+
+
+		<p:commandButton value="Email" type="button"
+			onclick="PF('dlg2').show();" />
+		<p:dialog header="Evolve IT Company" widgetVar="dlg2" modal="true"
+			height="100">
+			<h:outputText value="info@evolve.com" />
+		</p:dialog>
+
+
+		<p:commandButton value="Phone Number" type="button"
+			onclick="PF('dlg3').show();" />
+		<p:dialog header="Evolve IT Company" widgetVar="dlg3" modal="true"
+			height="100">
+			<h:outputText value="07999999999" />
+		</p:dialog>
+
+
+	</p:outputPanel>
+
+
+
+
+
+
+
+</ui:composition>
