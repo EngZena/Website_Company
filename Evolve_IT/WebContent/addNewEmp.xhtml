@@ -8,19 +8,21 @@
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/template/main.xhtml">
 	<ui:define name="content">
-		<h:form id="frmAddEmp" prependId="false">
+		<h:form id="frmAddNewEmp" prependId="false">
 			<p:growl id="msgGrol" globalOnly="true" showDetail="true"
 				showSummary="true" />
-			<p:panelGrid id="pnlAddEmp" columns="3">
+			<p:panelGrid id="pnlEMp" columns="3">
+
 				<f:facet name="header">
-					<p:outputLabel value="Employees DataBase" />
+					<p:outputLabel value="Add New Employee" />
 				</f:facet>
+
 
 				<p:outputLabel value="First Name" for="txtFirstName" />
 				<p:inputText id="txtFirstName" value="#{empMB.emp.firstName}"
-					required="true" requiredMessage="Enter the First Name"
+					required="true" requiredMessage="Enter the firstName"
 					validatorMessage="Enter correct name">
-					<f:validateLength maximum="10" minimum="4" />
+					<f:validateLength maximum="8" minimum="4" />
 				</p:inputText>
 				<p:message for="txtFirstName" />
 
@@ -28,14 +30,14 @@
 				<p:outputLabel value="Middle Name" for="txtMiddleName" />
 				<p:inputText id="txtMiddleName" value="#{empMB.emp.middleName}"
 					validatorMessage="Enter correct name">
-					<f:validateLength maximum="10" minimum="4" />
+					<f:validateLength maximum="8" minimum="4" />
 				</p:inputText>
 				<p:message for="txtMiddleName" />
 
 
 				<p:outputLabel value="Last Name" for="txtLastName" />
 				<p:inputText id="txtLastName" value="#{empMB.emp.lastName}"
-					required="true" requiredMessage="Enter the Last Name"
+					required="true" requiredMessage="Enter the lastName"
 					validatorMessage="Enter correct name">
 					<f:validateLength maximum="15" minimum="4" />
 				</p:inputText>
@@ -45,7 +47,7 @@
 				<p:outputLabel value="Email" for="txtEmail" />
 				<p:inputText id="txtEmail" value="#{empMB.emp.email}"
 					required="true" requiredMessage="Enter the email"
-					validatorMessage="Enter the correct email">
+					validatorMessage="Enter correct email">
 					<f:validateRegex
 						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
 					<p:ajax process="txtEmail" listener="#{empMB.checkEmailValidate}"
@@ -57,34 +59,32 @@
 				<p:password id="txtPass" value="#{empMB.emp.password}"
 					required="true" requiredMessage="Enter the password ">
 				</p:password>
-				<p:message id="passmsg" for="txtPass"></p:message>
+				<p:message id="passmsg" for="txtPass" />
 
+
+				<p:outputLabel value="Department" for="drpDep" />
+				<p:selectOneMenu id="drpDep" value="#{empMB.emp.depart}"
+					required="true" requiredMessage="you must determine the department">
+					<f:selectItem itemLabel="please select Dep."
+						noSelectionOption="true" />
+					<f:selectItems value="#{empMB.allDepartments}" var="Dep"
+						itemLabel="#{Dep}" itemValue="#{Dep}" />
+				</p:selectOneMenu>
+				<p:message for="drpDep" />
+
+
+				<p:outputLabel for="hire_date" value="Doc Hire Date " />
+				<p:calendar id="hire_date" value="#{empMB.emp.hireDate}" locale="de"
+					navigator="true" pattern="yyyy-MM-dd" showOn="button" />
+				<p:spacer />
 
 				<p:outputLabel value="Experience" for="checkExp" />
 				<p:selectOneRadio id="checkExp" value="#{empMB.emp.experience}">
 					<f:selectItem itemLabel="Fresh" itemValue="0-5" />
 					<f:selectItem itemLabel="Junior" itemValue="6-10" />
-					<f:selectItem itemLabel="Senior" itemValue="11-17" />
+					<f:selectItem itemLabel="Senior" itemValue="11-15" />
 				</p:selectOneRadio>
 				<p:spacer />
-
-				<ui:remove>
-					<p:outputLabel value="Department" for="drpDep" />
-					<p:selectOneMenu id="drpDep" value="#{empMB.emp.depart}">
-						<f:selectItem value="Please select a dep. "
-							noSelectionOption="true" />
-						<f:selectItems value="#{empMB.allDepartments}" var="Dep"
-							itemLabel="#{Dep}" itemValue="#{Dep}" />
-					</p:selectOneMenu>
-					<p:message for="drpDep" />
-				</ui:remove>
-
-				<p:outputLabel for="hire_date" value="Employee Hire Date " />
-				<p:calendar id="hire_date" value="#{empMB.emp.hireDate}" locale="de"
-					navigator="true" pattern="yyyy-MM-dd" showOn="button" />
-				<p:spacer />
-
-
 				<p:outputLabel value="Salary" for="txtSalary" />
 				<p:inputNumber id="txtSalary" value="#{empMB.emp.salary}"
 					required="true" requiredMessage="Enter the salary"
@@ -93,35 +93,38 @@
 
 
 
-				<p:outputLabel value="Address" for="txtAdd" />
-				<p:inputTextarea id="txtAdd" value="#{empMB.emp.address}" />
+				<p:outputLabel value="Address" for="txtAddress" />
+				<p:inputTextarea id="txtAddress" value="#{empMB.emp.address}" />
 				<p:spacer />
 
 
+
 				<f:facet name="footer">
-					<p:commandButton value="Add" process="pnlAddEmp" update="frmAddEmp"
+
+					<p:commandButton value="Add" process="pnlEMp" update="frmAddNewEmp"
 						action="#{empMB.addEmp}"
 						rendered="#{empMB.emp.id == null ? 'true' : 'false'}" />
 
-					<p:commandButton value="Update" process="pnlAddEmp"
-						update="frmAddEmp" action="#{empMB.updateEmp}"
+					<p:commandButton value="Update" process="pnlEMp"
+						update="frmAddNewEmp" action="#{empMB.updateEmp}"
 						rendered="#{empMB.emp.id == null ? 'false' : 'true'}" />
 
-					<p:commandButton value="Delete" process="pnlAddEmp"
-						update="frmAddEmp" action="#{empMB.deleteEmp}"
+					<p:commandButton value="Delete" styleClass="btn btn-primary"
+						action="#{empMB.deleteEmp}" process="frmAddNewEmp"
+						update="frmAddNewEmp"
 						rendered="#{empMB.emp.id == null ? 'false' : 'true'}" />
 
 					<p:commandButton value="Cancel" action="#{empMB.cancel}"
-						process="@this" update="frmAddEmp" />
+						process="@this" update="frmAddNewEmp" />
+
 
 				</f:facet>
-
 			</p:panelGrid>
 
-			<p:dataTable id="tblEmps" value="#{empMB.allEmployees}" var="emps"
+			<p:dataTable id="tblEmp" value="#{empMB.allEmployees}" var="emps"
 				selectionMode="Single" selection="#{empMB.emp}" rowKey="#{emps.id}">
 
-				<p:ajax event="rowSelect" update=":pnlAddEmp" />
+				<p:ajax event="rowSelect" update=":pnlEMp" />
 
 				<f:facet name="header">
 					<p:outputLabel value="Employees Tabel" />
@@ -152,18 +155,17 @@
 					<h:outputText value="emps.password" />
 				</p:column>
 
-				<ui:remove>
-					<p:column headerText="department">
-						<h:outputText value="#{emps.department}" />
-					</p:column>
-				</ui:remove>
-
-				<p:column headerText="Experience">
-					<h:outputText value="#{emps.experience}" />
+				<p:column headerText="department">
+					<h:outputText value="#{emps.depart}" />
 				</p:column>
+
 
 				<p:column headerText="Hire date">
 					<h:outputText value="#{emps.hireDate}" />
+				</p:column>
+				
+				<p:column headerText="Experience">
+					<h:outputText value="#{emps.experience}" />
 				</p:column>
 
 				<p:column headerText="Salary">
@@ -177,12 +179,7 @@
 
 
 			</p:dataTable>
-
-
-
 		</h:form>
-
 	</ui:define>
-
 </ui:composition>
 </html>

@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.evolve_it.pojo.Department;
+import com.evolve_it.pojo.Employees;
 
 @ManagedBean(name = "depMB")
 @SessionScoped
@@ -32,6 +33,7 @@ public class DepartmentMB {
 			depar.setDepId(allDepart.size() + 1);
 			allDepart.add(depar);
 			Department.allDeps.add(depar);
+			
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Added Successfully", depar.getDepName() + "  added"));
 

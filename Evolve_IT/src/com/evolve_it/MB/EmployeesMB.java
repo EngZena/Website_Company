@@ -36,7 +36,7 @@ public class EmployeesMB implements Serializable {
 	public void init() {
 		emp = new Employees();
 		allEmployees = new ArrayList<>();
-		allDepartments = new ArrayList<>();
+		allDepartments = Department.allDeps;
 	}
 
 	@ManagedProperty("#{depsMB}")
