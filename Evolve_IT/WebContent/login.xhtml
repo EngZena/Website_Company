@@ -8,9 +8,44 @@
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/template/main.xhtml">
 	<ui:define name="content">
-	
-	
+		<h:form id="lgnfrm" prependId="false">
+			<p:growl autoUpdate="true" showSummary="true" showDetail="true"
+				id="msgGrol" />
+			<p:panel id="pnlUsrs" header="Welcome users">
+
+				<p:panelGrid id="pnlGrdLog" columns="3" style="margin:auto;">
+
+					<p:outputLabel value="Email" for="txtEmail" />
+					<p:inputText id="txtEmail" value="#{empMB.emp.email}"
+						required="true" requiredMessage="Enter the email">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+						<p:ajax process="txtEmail"
+							listener="#{empMB.checkEmailValidate}"
+							update="emailMsg msgGrol" />
+					</p:inputText>
+					<p:message id="emailMsg" for="txtEmail" />
+
+
+					<p:outputLabel value="Password" for="txtPassword" />
+					<p:password id="txtPassword" value="#{empMB.emp.password}"
+						required="true" requiredMessage="Enter a password" />
+					<p:message for="txtPassword" />
+
+
+					<f:facet name="footer">
+						<p:commandButton value="Login" action="#{loginMB.Login}"
+							process="pnlGrdLog" update="lgnfrm" />
+					</f:facet>
+
+				</p:panelGrid>
+
+			</p:panel>
+
+		</h:form>
+
 	</ui:define>
-	
-	</ui:composition>
-	</html>
+
+</ui:composition>
+
+</html>

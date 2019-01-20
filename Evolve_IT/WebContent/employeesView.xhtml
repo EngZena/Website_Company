@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/WEB-INF/template/main.xhtml">
+	<ui:define name="content">
+
+
+		<h:form id="admnfrm" prependId="false">
+
+
+			<p:dataTable id="tblEmp" value="#{empMB.allEmployees}" var="emps"
+				selectionMode="Single" selection="#{empMB.emp}" rowKey="#{emps.id}">
+
+				<p:ajax event="rowSelect"  />
+
+				<f:facet name="header">
+					<p:outputLabel value="Employees Tabel" />
+				</f:facet>
+
+				<p:column headerText="ID" sortBy="#{emps.id}" filterBy="#{emps.id}">
+					<h:outputText value="#{emps.id}" />
+				</p:column>
+
+				<p:column headerText="firstName">
+					<h:outputText value="#{emps.firstName}" />
+				</p:column>
+
+				<p:column headerText="MiddleName">
+					<h:outputText value="#{emps.middleName}" />
+				</p:column>
+
+				<p:column headerText="lastName">
+					<h:outputText value="#{emps.lastName}" />
+				</p:column>
+
+				<p:column headerText="department">
+					<h:outputText value="#{emps.depart}" />
+				</p:column>
+
+
+
+			</p:dataTable>
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

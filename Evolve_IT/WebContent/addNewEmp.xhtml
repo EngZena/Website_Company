@@ -17,7 +17,6 @@
 					<p:outputLabel value="Add New Employee" />
 				</f:facet>
 
-
 				<p:outputLabel value="First Name" for="txtFirstName" />
 				<p:inputText id="txtFirstName" value="#{empMB.emp.firstName}"
 					required="true" requiredMessage="Enter the firstName"
@@ -55,6 +54,7 @@
 				</p:inputText>
 				<p:message id="emailMsg" for="txtEmail" />
 
+
 				<p:outputLabel value="Password" for="txtPass" />
 				<p:password id="txtPass" value="#{empMB.emp.password}"
 					required="true" requiredMessage="Enter the password ">
@@ -62,9 +62,15 @@
 				<p:message id="passmsg" for="txtPass" />
 
 
+				<p:outputLabel value="Job Type" for="checkExp" />
+				<p:selectOneRadio id="checkExp" value="#{empMB.emp.admin}">
+					<f:selectItem itemLabel="Admin" itemValue="0" />
+					<f:selectItem itemLabel="Employee" itemValue="1" />
+				</p:selectOneRadio>
+				<p:spacer />
+
 				<p:outputLabel value="Department" for="drpDep" />
-				<p:selectOneMenu id="drpDep" value="#{empMB.emp.depart}"
-					required="true" requiredMessage="you must determine the department">
+				<p:selectOneMenu id="drpDep" value="#{empMB.emp.depart}">
 					<f:selectItem itemLabel="please select Dep."
 						noSelectionOption="true" />
 					<f:selectItems value="#{empMB.allDepartments}" var="Dep"
@@ -78,13 +84,16 @@
 					navigator="true" pattern="yyyy-MM-dd" showOn="button" />
 				<p:spacer />
 
-				<p:outputLabel value="Experience" for="checkExp" />
-				<p:selectOneRadio id="checkExp" value="#{empMB.emp.experience}">
+
+				<p:outputLabel value="Experience" for="checkExp2" />
+				<p:selectOneRadio id="checkExp2" value="#{empMB.emp.experience}">
 					<f:selectItem itemLabel="Fresh" itemValue="0-5" />
 					<f:selectItem itemLabel="Junior" itemValue="6-10" />
 					<f:selectItem itemLabel="Senior" itemValue="11-15" />
 				</p:selectOneRadio>
 				<p:spacer />
+
+
 				<p:outputLabel value="Salary" for="txtSalary" />
 				<p:inputNumber id="txtSalary" value="#{empMB.emp.salary}"
 					required="true" requiredMessage="Enter the salary"
@@ -151,9 +160,13 @@
 				</p:column>
 
 				<p:column headerText="Password">
-					<h:outputText value="emps.password" />
+					<h:outputText value="#{emps.password}" />
 				</p:column>
 
+				<p:column headerText="Job Type">
+					<h:outputText value="#{emps.admin}" />
+				</p:column>
+				
 				<p:column headerText="department">
 					<h:outputText value="#{emps.depart}" />
 				</p:column>
@@ -162,7 +175,7 @@
 				<p:column headerText="Hire date">
 					<h:outputText value="#{emps.hireDate}" />
 				</p:column>
-				
+
 				<p:column headerText="Experience">
 					<h:outputText value="#{emps.experience}" />
 				</p:column>
